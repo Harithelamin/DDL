@@ -245,9 +245,17 @@ public class DobbeltLenketListe <T> implements Liste<T>{
     }
 
 
-
+     //Oppgave 7
     @Override
-    public void nullstill() {
+    public void nullstill(){
+        for (Node<T> temp = hode; temp !=null; temp = temp.neste) {
+            temp.verdi = null;
+            temp.forrige = temp.neste = null;
+        }
+
+        hode = hale = null;
+        antall = 0;
+       // antallEndringer++;
 
     }
 
