@@ -175,9 +175,26 @@ public class DobbeltLenketListe <T> implements Liste<T>{
     }
 
     @Override
-    public int indeksTil(T verdi) {
-        return 0;
+    public int indeksTil(T verdi){
+        //Her sjekker jeg om verdien ligger i første indeks
+        if( verdi == hode.verdi)
+            return 0;
+        //Her går vi gjennom hele liste, og sjekker om verdien til hver enkel node er lik neste verdi
+        else{
+            for (int i = 1; i <antall ; i++) {
+                Node<T> p = hode.neste;
+                if (p.verdi == verdi) {
+                    return i;
+                }
+                else{
+                    p = p.neste;
+                }
+
+            }
+        }
+        return -1;
     }
+
 
     @Override
     public T oppdater(int indeks, T verdi) {
