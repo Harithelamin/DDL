@@ -149,19 +149,42 @@ public class DobbeltLenketListe <T> implements Liste<T>{
     Node<T> finnNode(int indeks){
             return finnNode(indeks);
     }
-
-
-
-
-
-
-
-
-
-
+    
+    //oppgave 5
     @Override
-    public void leggInn(int indeks, T verdi) {
+    public void leggInn(int indeks, T verdi){
+    Objects.requireNonNull(verdi, "verdien kan ikke være null");
+    //Negative indekser og indekser større enn null er ulovlige
+    if(indeks < 0) throw new IndexOutOfBoundsException("indeks " + indeks + "er negativ");
+    else if(indeks > antall) throw new IndexOutOfBoundsException("Indeks " + indeks +  " > antall(" + antall + ") noder!");
 
+     //listen er tom
+        if(antall == 0 & indeks == 0) hode = hale = new Node<T>(verdi, null, null);
+    //verdien skal legges først
+        else if ( indeks == 0) {
+            hode = new Node<T>(verdi, null, hode);
+            hode.neste.forrige = hode;
+            //verdien skal legges bakerst
+    }
+    else if (indeks == antall) {
+        hale = new Node<T>(verdi, hale, null);
+        hale.forrige.neste = hale;
+    }
+    //legges i midten
+    else {
+        Node<T> p = hode;
+        for(int i = 0; i < indeks-1; i++)      {
+            p = p.neste;
+        }
+        Node<T> q = new Node<>(verdi, p, p.neste );
+        p.neste = q;
+        q.neste = p.neste;
+        q.forrige = p;
+        q.neste.forrige = q;
+
+        }
+
+        antall ++;
     }
 
     @Override
@@ -177,8 +200,7 @@ public class DobbeltLenketListe <T> implements Liste<T>{
             return true;
         }
     }
-
-
+    
     @Override
     public T hent(int indeks) {
         return null;
