@@ -165,15 +165,26 @@ public class DobbeltLenketListe <T> implements Liste<T>{
     }
 
     @Override
-    public boolean inneholder(T verdi) {
-        return false;
+    //Oppgave 4
+    public boolean inneholder(T verdi){
+        //Finner indeksen til gitte verdien, hvis indeksen er forskjellig
+        //fra -1, da finnes den. Ellers ikke
+        int indeks = indeksTil(verdi);
+        if (indeks == -1) {
+            return false;
+        }
+        else{
+            return true;
+        }
     }
+
 
     @Override
     public T hent(int indeks) {
         return null;
     }
-
+    
+    //oppgave4
     @Override
     public int indeksTil(T verdi){
         //Her sjekker jeg om verdien ligger i første indeks
