@@ -267,3 +267,41 @@ public class DobbeltLenketListe <T> implements Liste<T>{
     public static <T> void sorter(DobbeltLenketListe<String> liste, Comparator<T> tComparator) {
     }
 }
+
+//Oppagve 9
+//IKKE FERDIG ENDA
+ @Override
+    public void remove(){
+        if (fjernOK == false){ //hvis det ikke er mulig å kalle på denne metoden så sendes en Exception
+          throw new IllegalStateException("Ikke lov å kalle på denne metoden");
+        }
+        if(endringer != iteratorendringer ){
+            throw new ConcurrentModificationException("endringer er forskjellig fra interatorendringer");
+        }
+        fjernOK = false;
+        
+        if (antall == 1){
+            hale = null; 
+            hode = null; 
+        }
+        if(denne == null){//denne er hode 
+            Node<T> p = denne.forrige;
+            Node<T> q = denne.forrige.forrige; 
+            hale = null;
+            p.verdi = null;
+            p = null;
+            hale = q; 
+        }
+        else if (denne.forrige == hode){
+            Node<T> p = hode;
+            hode = denne;
+            hode.forrige = null;
+        }
+        else{
+            
+        }
+        antall--;
+        endringer++;
+        iteratorendringer++;
+                
+    }
